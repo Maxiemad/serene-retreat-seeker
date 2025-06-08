@@ -88,10 +88,10 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
         <div className="text-center mb-8">
           <RetreatLogo size="lg" className="mx-auto mb-4 scale-[1.0]" />
           <h1 className="text-3xl font-playfair font-semibold text-black mb-2">
-            Find Your Perfect Retreat
+            Retreat Planning tool
           </h1>
           <p className="text-black text-sm">
-            Let us help you discover the ideal retreat experience tailored just for you
+            Your Step-by-Step Guide to Hosting the Perfect Retreat
           </p>
         </div>
 

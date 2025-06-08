@@ -21,7 +21,7 @@ const RetreatLogo: React.FC<RetreatLogoProps> = ({
     <div className={`${sizeClasses[size]} ${className} flex items-center justify-center`}>
       <img 
         src="/lovable-uploads/7efdbb40-5a4a-4373-a6a1-1256bc74348e.png" 
-        alt="Goto Retreats - Find Your Perfect Retreat" 
+        alt="Goto Retreats - Retreat Planning tool" 
         className="w-full h-full object-contain animate-breathe"
       />
     </div>
