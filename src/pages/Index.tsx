@@ -1,14 +1,89 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import IntroForm from '@/components/IntroForm';
+import EmpathyMessage from '@/components/EmpathyMessage';
+import SurveyQuestion from '@/components/SurveyQuestion';
+import FinalMessage from '@/components/FinalMessage';
+import { surveyQuestions } from '@/data/surveyQuestions';
+
+interface UserInfo {
+  fullName: string;
+  email: string;
+  city: string;
+}
+
+type AppState = 'intro' | 'empathy' | 'survey' | 'complete';
 
 const Index = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  const [appState, setAppState] = useState<AppState>('intro');
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [currentSurveyStep, setCurrentSurveyStep] = useState(0);
+  const [surveyAnswers, setSurveyAnswers] = useState<Record<string, any>>({});
+
+  const handleIntroSubmit = (info: UserInfo) => {
+    setUserInfo(info);
+    setAppState('empathy');
+  };
+
+  const handleEmpathyContinue = () => {
+    setAppState('survey');
+  };
+
+  const handleSurveyAnswerChange = (questionId: string, answer: any) => {
+    setSurveyAnswers(prev => ({
+      ...prev,
+      [questionId]: answer
+    }));
+  };
+
+  const handleSurveyNext = () => {
+    if (currentSurveyStep < surveyQuestions.length - 1) {
+      setCurrentSurveyStep(prev => prev + 1);
+    } else {
+      // Survey complete - log all data
+      console.log('Retreat Planning Survey Complete!', {
+        userInfo,
+        surveyAnswers,
+        timestamp: new Date().toISOString()
+      });
+      setAppState('complete');
+    }
+  };
+
+  const handleGoHome = () => {
+    // Reset all state to start over
+    setAppState('intro');
+    setUserInfo(null);
+    setCurrentSurveyStep(0);
+    setSurveyAnswers({});
+  };
+
+  switch (appState) {
+    case 'intro':
+      return <IntroForm onSubmit={handleIntroSubmit} />;
+    
+    case 'empathy':
+      return <EmpathyMessage onContinue={handleEmpathyContinue} />;
+    
+    case 'survey':
+      return (
+        <SurveyQuestion
+          questions={surveyQuestions[currentSurveyStep]}
+          currentStep={currentSurveyStep + 1}
+          totalSteps={surveyQuestions.length}
+          answers={surveyAnswers}
+          onAnswerChange={handleSurveyAnswerChange}
+          onNext={handleSurveyNext}
+          isLastStep={currentSurveyStep === surveyQuestions.length - 1}
+        />
+      );
+    
+    case 'complete':
+      return <FinalMessage onGoHome={handleGoHome} />;
+    
+    default:
+      return <IntroForm onSubmit={handleIntroSubmit} />;
+  }
 };
 
 export default Index;
