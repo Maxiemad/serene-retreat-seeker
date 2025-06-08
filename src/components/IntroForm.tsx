@@ -160,9 +160,9 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
                   }`}>
                     <SelectValue placeholder="Select your city" />
                   </SelectTrigger>
-                  <SelectContent className="max-h-60">
+                  <SelectContent className="max-h-60 bg-white text-black">
                     {popularCities.map((city) => (
-                      <SelectItem key={city} value={city}>
+                      <SelectItem key={city} value={city} className="text-black hover:bg-gray-100">
                         {city}
                       </SelectItem>
                     ))}

@@ -39,11 +39,6 @@ const FinalMessage: React.FC<FinalMessageProps> = ({ onGoHome }) => {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
                 <div className="flex items-center space-x-2 text-sage-600">
-                  <span className="text-2xl animate-breathe">🙏</span>
-                  <span className="text-sm">Namaste</span>
-                </div>
-                <div className="w-px h-6 bg-sage-300 hidden sm:block"></div>
-                <div className="flex items-center space-x-2 text-sage-600">
                   <span className="text-2xl">📧</span>
                   <span className="text-sm">Check your email in 24-48 hours</span>
                 </div>
