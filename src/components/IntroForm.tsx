@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -87,7 +86,7 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
       <div className="w-full max-w-md animate-fade-in">
         {/* Logo */}
         <div className="text-center mb-8">
-          <RetreatLogo size="lg" className="mx-auto mb-4 scale-[0.5]" />
+          <RetreatLogo size="lg" className="mx-auto mb-4 scale-[1.0]" />
           <h1 className="text-3xl font-playfair font-semibold text-black mb-2">
             Find Your Perfect Retreat
           </h1>

@@ -14,7 +14,7 @@ const EmpathyMessage: React.FC<EmpathyMessageProps> = ({ onContinue }) => {
         <Card className="retreat-card-gradient border-sage-200 shadow-lg text-center">
           <CardContent className="p-8 md:p-12">
             <div className="mb-6">
-              <RetreatLogo size="xl" className="mx-auto mb-6 scale-[0.5]" />
+              <RetreatLogo size="xl" className="mx-auto mb-6 scale-[1.0]" />
               
               <div className="text-6xl mb-6 animate-float">
                 💛
