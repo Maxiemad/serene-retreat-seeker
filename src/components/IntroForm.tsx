@@ -87,11 +87,11 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
       <div className="w-full max-w-md animate-fade-in">
         {/* Logo */}
         <div className="text-center mb-8">
-          <RetreatLogo size="lg" className="mx-auto mb-4" />
-          <h1 className="text-3xl font-playfair font-semibold text-sage-800 mb-2">
+          <RetreatLogo size="xl" className="mx-auto mb-4 scale-[2]" />
+          <h1 className="text-3xl font-playfair font-semibold text-black mb-2">
             Find Your Perfect Retreat
           </h1>
-          <p className="text-sage-600 text-sm">
+          <p className="text-black text-sm">
             Let us help you discover the ideal retreat experience tailored just for you
           </p>
         </div>
@@ -99,10 +99,10 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
         {/* Form Card */}
         <Card className="retreat-card-gradient border-sage-200 shadow-lg">
           <CardHeader className="text-center pb-4">
-            <CardTitle className="text-xl font-playfair text-sage-800">
+            <CardTitle className="text-xl font-playfair text-black">
               Let's Get Started
             </CardTitle>
-            <CardDescription className="text-sage-600">
+            <CardDescription className="text-black">
               Tell us a bit about yourself to begin your journey
             </CardDescription>
           </CardHeader>
@@ -110,7 +110,7 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="fullName" className="text-sage-700 font-medium">
+                <Label htmlFor="fullName" className="text-black font-medium">
                   Full Name
                 </Label>
                 <Input
@@ -119,7 +119,7 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
                   placeholder="Enter your full name"
                   value={formData.fullName}
                   onChange={(e) => handleInputChange('fullName', e.target.value)}
-                  className={`border-sage-300 focus:border-sage-500 focus:ring-sage-500 ${
+                  className={`border-sage-300 focus:border-sage-500 focus:ring-sage-500 text-black placeholder:text-gray-500 ${
                     errors.fullName ? 'border-red-300 focus:border-red-500' : ''
                   }`}
                 />
@@ -129,7 +129,7 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sage-700 font-medium">
+                <Label htmlFor="email" className="text-black font-medium">
                   Email Address
                 </Label>
                 <Input
@@ -138,7 +138,7 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
                   placeholder="Enter your email address"
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  className={`border-sage-300 focus:border-sage-500 focus:ring-sage-500 ${
+                  className={`border-sage-300 focus:border-sage-500 focus:ring-sage-500 text-black placeholder:text-gray-500 ${
                     errors.email ? 'border-red-300 focus:border-red-500' : ''
                   }`}
                 />
@@ -148,17 +148,17 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="city" className="text-sage-700 font-medium">
+                <Label htmlFor="city" className="text-black font-medium">
                   City
                 </Label>
                 <Select 
                   value={formData.city} 
                   onValueChange={(value) => handleInputChange('city', value)}
                 >
-                  <SelectTrigger className={`border-sage-300 focus:border-sage-500 focus:ring-sage-500 ${
+                  <SelectTrigger className={`border-sage-300 focus:border-sage-500 focus:ring-sage-500 text-black ${
                     errors.city ? 'border-red-300 focus:border-red-500' : ''
                   }`}>
-                    <SelectValue placeholder="Select your city" />
+                    <SelectValue placeholder="Select your city" className="text-black" />
                   </SelectTrigger>
                   <SelectContent className="max-h-60 bg-white text-black">
                     {popularCities.map((city) => (
@@ -192,7 +192,7 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
         </Card>
 
         {/* Footer */}
-        <div className="text-center mt-6 text-sage-600 text-sm">
+        <div className="text-center mt-6 text-black text-sm">
           <p>Your information is safe and secure with us 🔒</p>
         </div>
       </div>

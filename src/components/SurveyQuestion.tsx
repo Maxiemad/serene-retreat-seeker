@@ -59,7 +59,7 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
                 />
                 <Label 
                   htmlFor={`${question.id}-${option}`}
-                  className="text-sage-700 cursor-pointer flex-1"
+                  className="text-black cursor-pointer flex-1"
                 >
                   {option}
                 </Label>
@@ -87,7 +87,7 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
                 />
                 <Label 
                   htmlFor={`${question.id}-${option}`}
-                  className="text-sage-700 cursor-pointer flex-1"
+                  className="text-black cursor-pointer flex-1"
                 >
                   {option}
                 </Label>
@@ -103,7 +103,7 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
             placeholder={question.placeholder}
             value={answers[question.id] || ''}
             onChange={(e) => onAnswerChange(question.id, e.target.value)}
-            className="border-sage-300 focus:border-sage-500 focus:ring-sage-500"
+            className="border-sage-300 focus:border-sage-500 focus:ring-sage-500 text-black placeholder:text-gray-500"
           />
         );
 
@@ -113,7 +113,7 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
             placeholder={question.placeholder}
             value={answers[question.id] || ''}
             onChange={(e) => onAnswerChange(question.id, e.target.value)}
-            className="border-sage-300 focus:border-sage-500 focus:ring-sage-500 min-h-[100px]"
+            className="border-sage-300 focus:border-sage-500 focus:ring-sage-500 min-h-[100px] text-black placeholder:text-gray-500"
           />
         );
 
@@ -132,7 +132,7 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
             <div className="space-y-8">
               {questions.map((question, index) => (
                 <div key={question.id} className="space-y-4">
-                  <h3 className="text-xl font-playfair font-medium text-sage-800">
+                  <h3 className="text-xl font-playfair font-medium text-black">
                     {index + 1}. {question.title}
                     {question.required && <span className="text-red-500 ml-1">*</span>}
                   </h3>
