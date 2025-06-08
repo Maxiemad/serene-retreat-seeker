@@ -53,7 +53,7 @@ const FinalMessage: React.FC<FinalMessageProps> = ({ onGoHome }) => {
                 <Button 
                   variant="outline"
                   className="border-sage-400 text-black hover:bg-sage-50 font-medium px-6 py-3 transition-all duration-300"
-                  onClick={() => window.open('mailto:hello@gotretreats.com?subject=Feedback on Retreat Planning Tool', '_blank')}
+                  onClick={() => window.open('mailto:hello@gotoretreats.com?subject=Feedback on Retreat Planning Tool', '_blank')}
                 >
                   💭 Share Feedback
                 </Button>

@@ -5,6 +5,8 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import RetreatLogo from './RetreatLogo';
+import cities from 'cities-list';
+import CitySelector from './CitySelector';
 
 interface UserInfo {
   fullName: string;
@@ -13,34 +15,45 @@ interface UserInfo {
 }
 
 interface IntroFormProps {
-  onSubmit: (userInfo: UserInfo) => void;
+  onSubmit: (data: UserInfo) => void;
 }
 
+// Top 50 popular world cities for default dropdown
+const popularCities = [
+  'New York', 'London', 'Paris', 'Tokyo', 'Dubai', 'Singapore', 'Hong Kong', 'Sydney', 'Los Angeles', 'Toronto',
+  'San Francisco', 'Chicago', 'Berlin', 'Barcelona', 'Madrid', 'Rome', 'Istanbul', 'Bangkok', 'Seoul', 'Shanghai',
+  'Beijing', 'Moscow', 'Mumbai', 'Delhi', 'Mexico City', 'São Paulo', 'Buenos Aires', 'Cape Town', 'Cairo', 'Kuala Lumpur',
+  'Jakarta', 'Melbourne', 'Vienna', 'Dublin', 'Prague', 'Budapest', 'Lisbon', 'Warsaw', 'Brussels', 'Zurich',
+  'Stockholm', 'Copenhagen', 'Vancouver', 'Montreal', 'Miami', 'Boston', 'San Diego', 'Houston', 'Seattle', 'Auckland'
+];
+
+const allCities = Object.keys(cities).sort();
+
 const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
-  const [formData, setFormData] = useState<UserInfo>({
+  const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    city: ''
+    city: null, // will be an object { value, label }
   });
-  const [errors, setErrors] = useState<Partial<UserInfo>>({});
+  const [errors, setErrors] = useState<Partial<typeof formData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [filteredCities, setFilteredCities] = useState<string[]>(popularCities);
+  const [searchValue, setSearchValue] = useState('');
 
-  // Sample cities - in a real app, this would come from an API
-  const popularCities = [
-    'New York, NY', 'Los Angeles, CA', 'Chicago, IL', 'Houston, TX', 'Phoenix, AZ',
-    'Philadelphia, PA', 'San Antonio, TX', 'San Diego, CA', 'Dallas, TX', 'San Jose, CA',
-    'Austin, TX', 'Jacksonville, FL', 'Fort Worth, TX', 'Columbus, OH', 'Charlotte, NC',
-    'San Francisco, CA', 'Indianapolis, IN', 'Seattle, WA', 'Denver, CO', 'Washington, DC',
-    'Boston, MA', 'El Paso, TX', 'Nashville, TN', 'Detroit, MI', 'Oklahoma City, OK',
-    'Portland, OR', 'Las Vegas, NV', 'Memphis, TN', 'Louisville, KY', 'Baltimore, MD',
-    'Milwaukee, WI', 'Albuquerque, NM', 'Tucson, AZ', 'Fresno, CA', 'Mesa, AZ',
-    'Sacramento, CA', 'Atlanta, GA', 'Kansas City, MO', 'Colorado Springs, CO', 'Miami, FL',
-    'Raleigh, NC', 'Omaha, NE', 'Long Beach, CA', 'Virginia Beach, VA', 'Oakland, CA',
-    'Minneapolis, MN', 'Tulsa, OK', 'Arlington, TX', 'Tampa, FL', 'New Orleans, LA'
-  ];
+  const handleCitySearch = (value: string) => {
+    setSearchValue(value);
+    if (value.length >= 2) {
+      const filtered = allCities.filter(city => 
+        city.toLowerCase().includes(value.toLowerCase())
+      ).slice(0, 100); // Limit to 100 results for performance
+      setFilteredCities(filtered);
+    } else {
+      setFilteredCities(popularCities);
+    }
+  };
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<UserInfo> = {};
+    const newErrors: Partial<typeof formData> = {};
 
     if (!formData.fullName.trim()) {
       newErrors.fullName = 'Full name is required';
@@ -74,7 +87,7 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
     }, 800);
   };
 
-  const handleInputChange = (field: keyof UserInfo, value: string) => {
+  const handleInputChange = (field: keyof typeof formData, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: undefined }));
@@ -96,16 +109,13 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
         </div>
 
         {/* Form Card */}
-        <Card className="retreat-card-gradient border-sage-200 shadow-lg">
-          <CardHeader className="text-center pb-4">
-            <CardTitle className="text-xl font-playfair text-black">
-              Let's Get Started
-            </CardTitle>
-            <CardDescription className="text-black">
-              Tell us a bit about yourself to begin your journey
+        <Card className="bg-white/80 backdrop-blur-sm border-sage-200 shadow-lg">
+          <CardHeader>
+            <CardTitle className="text-2xl font-playfair text-black">Let's Begin Your Journey</CardTitle>
+            <CardDescription className="text-black/70">
+              Tell us a bit about yourself to get started
             </CardDescription>
           </CardHeader>
-          
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
@@ -114,13 +124,12 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
                 </Label>
                 <Input
                   id="fullName"
-                  type="text"
-                  placeholder="Enter your full name"
                   value={formData.fullName}
                   onChange={(e) => handleInputChange('fullName', e.target.value)}
-                  className={`border-sage-300 focus:border-sage-500 focus:ring-sage-500 text-black placeholder:text-gray-500 ${
+                  className={`border-sage-300 focus:border-sage-500 focus:ring-sage-500 text-black ${
                     errors.fullName ? 'border-red-300 focus:border-red-500' : ''
                   }`}
+                  placeholder="Enter your full name"
                 />
                 {errors.fullName && (
                   <p className="text-red-500 text-sm">{errors.fullName}</p>
@@ -129,17 +138,17 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
 
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-black font-medium">
-                  Email Address
+                  Email
                 </Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Enter your email address"
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  className={`border-sage-300 focus:border-sage-500 focus:ring-sage-500 text-black placeholder:text-gray-500 ${
+                  className={`border-sage-300 focus:border-sage-500 focus:ring-sage-500 text-black ${
                     errors.email ? 'border-red-300 focus:border-red-500' : ''
                   }`}
+                  placeholder="Enter your email"
                 />
                 {errors.email && (
                   <p className="text-red-500 text-sm">{errors.email}</p>
@@ -150,23 +159,10 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
                 <Label htmlFor="city" className="text-black font-medium">
                   City
                 </Label>
-                <Select 
-                  value={formData.city} 
-                  onValueChange={(value) => handleInputChange('city', value)}
-                >
-                  <SelectTrigger className={`border-sage-300 focus:border-sage-500 focus:ring-sage-500 text-black ${
-                    errors.city ? 'border-red-300 focus:border-red-500' : ''
-                  }`}>
-                    <SelectValue placeholder="Select your city" className="text-black" />
-                  </SelectTrigger>
-                  <SelectContent className="max-h-60 bg-white text-black">
-                    {popularCities.map((city) => (
-                      <SelectItem key={city} value={city} className="text-black hover:bg-gray-100">
-                        {city}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <CitySelector
+                  value={formData.city}
+                  onChange={(option) => handleInputChange('city', option)}
+                />
                 {errors.city && (
                   <p className="text-red-500 text-sm">{errors.city}</p>
                 )}
@@ -189,11 +185,6 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
             </form>
           </CardContent>
         </Card>
-
-        {/* Footer */}
-        <div className="text-center mt-6 text-black text-sm">
-          <p>Your information is safe and secure with us 🔒</p>
-        </div>
       </div>
     </div>
   );

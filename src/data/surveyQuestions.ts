@@ -1,4 +1,3 @@
-
 import { Question } from '@/components/SurveyQuestion';
 
 export const surveyQuestions: Question[][] = [
@@ -140,7 +139,7 @@ export const surveyQuestions: Question[][] = [
       id: 'dietary-needs',
       title: 'Do you have any dietary preferences or restrictions?',
       type: 'checkbox',
-      required: false,
+      required: true,
       options: [
         'Vegetarian',
         'Vegan',
@@ -156,7 +155,7 @@ export const surveyQuestions: Question[][] = [
       id: 'accessibility-needs',
       title: 'Do you have any accessibility requirements or health considerations?',
       type: 'textarea',
-      required: false,
+      required: true,
       placeholder: 'Please describe any mobility needs, health conditions, or accommodations that would help us find the perfect retreat for you...'
     }
   ],
@@ -181,7 +180,7 @@ export const surveyQuestions: Question[][] = [
       id: 'special-requests',
       title: 'Is there anything else you\'d like us to know or any special requests?',
       type: 'textarea',
-      required: false,
+      required: true,
       placeholder: 'Share any additional preferences, special occasions, specific goals, or anything else that would help us create the perfect retreat experience for you...'
     }
   ]

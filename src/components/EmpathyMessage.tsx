@@ -2,10 +2,31 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import RetreatLogo from './RetreatLogo';
+import Select from "react-select";
+import cityData from "../data/cities.json"; // use the local JSON file
 
 interface EmpathyMessageProps {
   onContinue: () => void;
 }
+
+const options = (cityData as Array<{ name: string; country: string }>).map((city) => ({
+  value: city.name,
+  label: `${city.name}, ${city.country}`,
+}));
+
+const CitySelector = ({ value, onChange }) => (
+  <Select
+    options={options}
+    value={options.find((opt) => opt.value === value)}
+    onChange={(selected) => onChange(selected ? selected.value : "")}
+    placeholder="Search and select your city"
+    isClearable
+    isSearchable
+    styles={{
+      menu: (provided) => ({ ...provided, zIndex: 9999 }),
+    }}
+  />
+);
 
 const EmpathyMessage: React.FC<EmpathyMessageProps> = ({ onContinue }) => {
   return (
@@ -20,13 +41,14 @@ const EmpathyMessage: React.FC<EmpathyMessageProps> = ({ onContinue }) => {
                 💛
               </div>
               
-              <h2 className="text-2xl md:text-3xl font-playfair font-semibold text-black mb-4">
+              <h2 className="text-lg font-playfair font-semibold text-black mb-4">
                 Thank you for using our Retreat Planning Tool
               </h2>
               
               <p className="text-lg text-black leading-relaxed mb-8 max-w-lg mx-auto">
-                We deeply value your interest in finding your perfect retreat. 
-                Your journey to wellness and self-discovery is important to us.
+              We're honored to be part of your journey in creating your ideal retreat itinerary.
+              <br></br>
+              Your wellness journey begins here.
               </p>
               
               <div className="flex flex-col items-center space-y-4 mb-8">
