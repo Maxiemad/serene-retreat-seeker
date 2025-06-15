@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -143,10 +144,73 @@
   50% { transform: scale(1.05); }
 }
 
+@keyframes trail-vertical {
+  0% { transform: translateY(-100vh); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes trail-vertical-reverse {
+  0% { transform: translateY(100vh); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+@keyframes trail-horizontal {
+  0% { transform: translateX(-100vw); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(100vw); opacity: 0; }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
 
 .animate-breathe {
   animation: breathe 4s ease-in-out infinite;
+}
+
+.animate-trail-vertical {
+  animation: trail-vertical 8s linear infinite;
+}
+
+.animate-trail-vertical-delayed {
+  animation: trail-vertical 8s linear infinite;
+  animation-delay: 2s;
+}
+
+.animate-trail-vertical-slow {
+  animation: trail-vertical 12s linear infinite;
+  animation-delay: 4s;
+}
+
+.animate-trail-vertical-reverse {
+  animation: trail-vertical-reverse 10s linear infinite;
+}
+
+.animate-trail-vertical-reverse-delayed {
+  animation: trail-vertical-reverse 10s linear infinite;
+  animation-delay: 3s;
+}
+
+.animate-trail-vertical-reverse-slow {
+  animation: trail-vertical-reverse 14s linear infinite;
+  animation-delay: 1s;
+}
+
+.animate-trail-horizontal {
+  animation: trail-horizontal 15s linear infinite;
+}
+
+.animate-trail-horizontal-delayed {
+  animation: trail-horizontal 15s linear infinite;
+  animation-delay: 5s;
+}
+
+.animate-trail-horizontal-slow {
+  animation: trail-horizontal 20s linear infinite;
+  animation-delay: 10s;
 }

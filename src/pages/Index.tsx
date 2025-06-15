@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import IntroForm from '@/components/IntroForm';
 import EmpathyMessage from '@/components/EmpathyMessage';
 import SurveyQuestion from '@/components/SurveyQuestion';
 import FinalMessage from '@/components/FinalMessage';
+import WellnessTrails from '@/components/WellnessTrails';
 import { surveyQuestions } from '@/data/surveyQuestions';
 
 interface UserInfo {
@@ -58,32 +58,41 @@ const Index = () => {
     setSurveyAnswers({});
   };
 
-  switch (appState) {
-    case 'intro':
-      return <IntroForm onSubmit={handleIntroSubmit} />;
-    
-    case 'empathy':
-      return <EmpathyMessage onContinue={handleEmpathyContinue} />;
-    
-    case 'survey':
-      return (
-        <SurveyQuestion
-          questions={surveyQuestions[currentSurveyStep]}
-          currentStep={currentSurveyStep + 1}
-          totalSteps={surveyQuestions.length}
-          answers={surveyAnswers}
-          onAnswerChange={handleSurveyAnswerChange}
-          onNext={handleSurveyNext}
-          isLastStep={currentSurveyStep === surveyQuestions.length - 1}
-        />
-      );
-    
-    case 'complete':
-      return <FinalMessage onGoHome={handleGoHome} />;
-    
-    default:
-      return <IntroForm onSubmit={handleIntroSubmit} />;
-  }
+  return (
+    <div className="relative">
+      <WellnessTrails />
+      <div className="relative z-10">
+        {(() => {
+          switch (appState) {
+            case 'intro':
+              return <IntroForm onSubmit={handleIntroSubmit} />;
+            
+            case 'empathy':
+              return <EmpathyMessage onContinue={handleEmpathyContinue} />;
+            
+            case 'survey':
+              return (
+                <SurveyQuestion
+                  questions={surveyQuestions[currentSurveyStep]}
+                  currentStep={currentSurveyStep + 1}
+                  totalSteps={surveyQuestions.length}
+                  answers={surveyAnswers}
+                  onAnswerChange={handleSurveyAnswerChange}
+                  onNext={handleSurveyNext}
+                  isLastStep={currentSurveyStep === surveyQuestions.length - 1}
+                />
+              );
+            
+            case 'complete':
+              return <FinalMessage onGoHome={handleGoHome} />;
+            
+            default:
+              return <IntroForm onSubmit={handleIntroSubmit} />;
+          }
+        })()}
+      </div>
+    </div>
+  );
 };
 
 export default Index;
