@@ -104,21 +104,34 @@
 
   .text-sage-50 { color: rgb(var(--sage-50)); }
   .text-sage-100 { color: rgb(var(--sage-100)); }
+  .text-sage-200 { color: rgb(var(--sage-200)); }
+  .text-sage-300 { color: rgb(var(--sage-300)); }
+  .text-sage-400 { color: rgb(var(--sage-400)); }
   .text-sage-500 { color: rgb(var(--sage-500)); }
   .text-sage-600 { color: rgb(var(--sage-600)); }
   .text-sage-700 { color: rgb(var(--sage-700)); }
   .text-sage-900 { color: rgb(var(--sage-900)); }
 
+  .text-earth-50 { color: rgb(var(--earth-50)); }
+  .text-earth-100 { color: rgb(var(--earth-100)); }
+  .text-earth-200 { color: rgb(var(--earth-200)); }
+  .text-earth-300 { color: rgb(var(--earth-300)); }
+  .text-earth-400 { color: rgb(var(--earth-400)); }
+  .text-earth-500 { color: rgb(var(--earth-500)); }
+
   .bg-sage-50 { background-color: rgb(var(--sage-50)); }
   .bg-sage-100 { background-color: rgb(var(--sage-100)); }
   .bg-sage-200 { background-color: rgb(var(--sage-200)); }
   .bg-sage-300 { background-color: rgb(var(--sage-300)); }
+  .bg-sage-400 { background-color: rgb(var(--sage-400)); }
   .bg-sage-500 { background-color: rgb(var(--sage-500)); }
   .bg-sage-600 { background-color: rgb(var(--sage-600)); }
 
   .bg-earth-50 { background-color: rgb(var(--earth-50)); }
   .bg-earth-100 { background-color: rgb(var(--earth-100)); }
   .bg-earth-200 { background-color: rgb(var(--earth-200)); }
+  .bg-earth-300 { background-color: rgb(var(--earth-300)); }
+  .bg-earth-400 { background-color: rgb(var(--earth-400)); }
 
   .border-sage-200 { border-color: rgb(var(--sage-200)); }
   .border-sage-300 { border-color: rgb(var(--sage-300)); }
