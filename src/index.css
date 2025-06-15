@@ -165,6 +165,31 @@
   100% { transform: translateX(100vw); opacity: 0; }
 }
 
+/* Stick figure animations */
+@keyframes stickman-down {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translateY(50vh) rotate(180deg); }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes stickman-up {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translateY(-50vh) rotate(-180deg); }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(-360deg); opacity: 0; }
+}
+
+@keyframes stickman-right {
+  0% { transform: translateX(-100vw) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translateX(50vw) rotate(180deg); }
+  90% { opacity: 1; }
+  100% { transform: translateX(100vw) rotate(360deg); opacity: 0; }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -213,4 +238,47 @@
 .animate-trail-horizontal-slow {
   animation: trail-horizontal 20s linear infinite;
   animation-delay: 10s;
+}
+
+/* Stick figure animation classes */
+.animate-stickman-down {
+  animation: stickman-down 12s linear infinite;
+}
+
+.animate-stickman-down-delayed {
+  animation: stickman-down 12s linear infinite;
+  animation-delay: 4s;
+}
+
+.animate-stickman-down-slow {
+  animation: stickman-down 16s linear infinite;
+  animation-delay: 8s;
+}
+
+.animate-stickman-up {
+  animation: stickman-up 14s linear infinite;
+}
+
+.animate-stickman-up-delayed {
+  animation: stickman-up 14s linear infinite;
+  animation-delay: 5s;
+}
+
+.animate-stickman-up-slow {
+  animation: stickman-up 18s linear infinite;
+  animation-delay: 2s;
+}
+
+.animate-stickman-right {
+  animation: stickman-right 16s linear infinite;
+}
+
+.animate-stickman-right-delayed {
+  animation: stickman-right 16s linear infinite;
+  animation-delay: 6s;
+}
+
+.animate-stickman-right-slow {
+  animation: stickman-right 20s linear infinite;
+  animation-delay: 12s;
 }
