@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import IntroForm from '@/components/IntroForm';
 import EmpathyMessage from '@/components/EmpathyMessage';
@@ -50,6 +51,12 @@ const Index = () => {
     }
   };
 
+  const handleSurveyPrev = () => {
+    if (currentSurveyStep > 0) {
+      setCurrentSurveyStep(prev => prev - 1);
+    }
+  };
+
   const handleGoHome = () => {
     // Reset all state to start over
     setAppState('intro');
@@ -79,7 +86,9 @@ const Index = () => {
                   answers={surveyAnswers}
                   onAnswerChange={handleSurveyAnswerChange}
                   onNext={handleSurveyNext}
+                  onPrev={handleSurveyPrev}
                   isLastStep={currentSurveyStep === surveyQuestions.length - 1}
+                  isFirstStep={currentSurveyStep === 0}
                 />
               );
             

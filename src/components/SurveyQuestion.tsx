@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,7 +24,9 @@ interface SurveyQuestionProps {
   answers: Record<string, any>;
   onAnswerChange: (questionId: string, answer: any) => void;
   onNext: () => void;
+  onPrev: () => void;
   isLastStep?: boolean;
+  isFirstStep?: boolean;
 }
 
 const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
@@ -35,7 +36,9 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
   answers,
   onAnswerChange,
   onNext,
-  isLastStep = false
+  onPrev,
+  isLastStep = false,
+  isFirstStep = false
 }) => {
   const canProceed = questions.every(q => 
     !q.required || (answers[q.id] && answers[q.id] !== '')
@@ -141,7 +144,16 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
               ))}
             </div>
 
-            <div className="flex justify-center mt-8">
+            <div className="flex justify-between items-center mt-8">
+              <Button 
+                onClick={onPrev}
+                disabled={isFirstStep}
+                variant="outline"
+                className="border-sage-300 text-sage-700 hover:bg-sage-50 disabled:opacity-50 font-medium px-8 py-3 transition-all duration-300"
+              >
+                ← Previous
+              </Button>
+              
               <Button 
                 onClick={onNext}
                 disabled={!canProceed}
