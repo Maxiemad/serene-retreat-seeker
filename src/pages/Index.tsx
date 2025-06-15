@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import IntroForm from '@/components/IntroForm';
 import EmpathyMessage from '@/components/EmpathyMessage';
@@ -6,6 +5,8 @@ import SurveyQuestion from '@/components/SurveyQuestion';
 import FinalMessage from '@/components/FinalMessage';
 import WellnessTrails from '@/components/WellnessTrails';
 import { surveyQuestions } from '@/data/surveyQuestions';
+import { submitToSheet } from '@/services/googleSheetService';
+import { toast } from '@/components/ui/sonner';
 
 interface UserInfo {
   fullName: string;
@@ -41,12 +42,19 @@ const Index = () => {
     if (currentSurveyStep < surveyQuestions.length - 1) {
       setCurrentSurveyStep(prev => prev + 1);
     } else {
-      // Survey complete - log all data
+      // Survey complete - log all data and send to spreadsheet
       console.log('Retreat Planning Survey Complete!', {
         userInfo,
         surveyAnswers,
         timestamp: new Date().toISOString()
       });
+      
+      toast.promise(submitToSheet(userInfo, surveyAnswers), {
+        loading: 'Submitting your answers to the spreadsheet...',
+        success: 'Your answers have been saved!',
+        error: 'Oh no! There was an error saving your answers.',
+      });
+
       setAppState('complete');
     }
   };

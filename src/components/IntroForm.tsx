@@ -82,7 +82,11 @@ const IntroForm: React.FC<IntroFormProps> = ({ onSubmit }) => {
     
     // Simulate API call
     setTimeout(() => {
-      onSubmit(formData);
+      onSubmit({
+        fullName: formData.fullName,
+        email: formData.email,
+        city: formData.city?.value || '',
+      });
       setIsSubmitting(false);
     }, 800);
   };
