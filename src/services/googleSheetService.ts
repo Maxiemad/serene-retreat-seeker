@@ -55,14 +55,31 @@ export const submitToSheet = async (userInfo: UserInfo | null, surveyAnswers: Su
   } catch (error) {
     console.error("Network error when submitting to Google Sheet:", error);
     
-    // If it's a network error, we'll still save the data locally for debugging
-    console.log("Data that failed to submit:", dataToSubmit);
+    // Save data locally as backup
+    const backupKey = `retreat-data-${Date.now()}`;
+    localStorage.setItem(backupKey, JSON.stringify(dataToSubmit));
+    console.log("Data saved locally as backup:", backupKey);
     
-    // Re-throw with more specific error message
+    // Provide specific error messages
     if (error instanceof TypeError && error.message.includes('fetch')) {
-      throw new Error("Network error: Unable to reach Google Sheet. Please check your internet connection or the Google Apps Script configuration.");
+      throw new Error("Unable to connect to Google Sheet. Your data has been saved locally. Please check the Google Apps Script setup.");
     }
     
-    throw error;
+    throw new Error("Failed to save to Google Sheet, but your data is saved locally as backup.");
   }
+};
+
+// Function to retrieve locally saved data
+export const getLocalBackups = () => {
+  const backups = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key && key.startsWith('retreat-data-')) {
+      const data = localStorage.getItem(key);
+      if (data) {
+        backups.push({ key, data: JSON.parse(data) });
+      }
+    }
+  }
+  return backups;
 };
