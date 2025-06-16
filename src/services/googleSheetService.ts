@@ -29,21 +29,40 @@ export const submitToSheet = async (userInfo: UserInfo | null, surveyAnswers: Su
 
   console.log("Submitting to Google Sheet:", dataToSubmit);
 
-  const response = await fetch(SCRIPT_URL, {
-    method: "POST",
-    body: JSON.stringify(dataToSubmit),
-    headers: {
-      "Content-Type": "application/json"
+  try {
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "cors",
+      body: JSON.stringify(dataToSubmit),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    console.log("Response status:", response.status);
+    console.log("Response ok:", response.ok);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Failed to submit to Google Sheet. Status:", response.status);
+      console.error("Error response:", errorText);
+      throw new Error(`Failed to submit to Google Sheet: ${response.status} - ${errorText}`);
     }
-  });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error("Failed to submit to Google Sheet:", errorText);
-    throw new Error(`Failed to submit to Google Sheet`);
+    const result = await response.text();
+    console.log("Successfully submitted to Google Sheet:", result);
+    return result;
+  } catch (error) {
+    console.error("Network error when submitting to Google Sheet:", error);
+    
+    // If it's a network error, we'll still save the data locally for debugging
+    console.log("Data that failed to submit:", dataToSubmit);
+    
+    // Re-throw with more specific error message
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      throw new Error("Network error: Unable to reach Google Sheet. Please check your internet connection or the Google Apps Script configuration.");
+    }
+    
+    throw error;
   }
-
-  const result = await response.text();
-  console.log("Successfully submitted to Google Sheet:", result);
-  return result;
 };
