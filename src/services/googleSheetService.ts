@@ -1,5 +1,4 @@
-
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyR6mFuy1bnAsT8nEDjPLfRDU0GKmUpQoeA5ZHib-G5JwkYFJa8Tg7zwXYX5Kr3K_wV/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzLq_KSQTmGgABVTGhbzDNG00mY3CeDAKHFIrgnpzd0IC9orw3fT5sO_RMNcKGmXf97fQ/exec";
 
 interface UserInfo {
   fullName?: string;
